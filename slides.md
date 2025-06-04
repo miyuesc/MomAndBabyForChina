@@ -34,34 +34,34 @@ src: ./pages/01-妈妈待产&住院包.md
 hide: false
 ---
 ---
-src:./pages/02-宝宝待产&住院包.md
+src: ./pages/02-宝宝待产&住院包.md
 hide: false
 ---
 ---
-src:./pages/03-妈妈月子&哺乳期.md
+src: ./pages/03-妈妈月子&哺乳期.md
 hide: false
 ---
 ---
-src:./pages/04-宝宝居家成长指南.md
+src: ./pages/04-宝宝居家成长指南.md
 hide: false
 ---
 ---
-src:./pages/10-宝宝注意事项.md
+src: ./pages/10-宝宝注意事项.md
 hide: false
 ---
 ---
-src:./pages/11-1-安全座椅.md
+src: ./pages/11-1-安全座椅.md
 hide: false
 ---
 ---
-src:./pages/11-2-婴儿推车.md
+src: ./pages/11-2-婴儿推车.md
 hide: false
 ---
 ---
-src:./pages/12-婴幼儿相关资料.md
+src: ./pages/12-婴幼儿相关资料.md
 hide: false
 ---
 ---
-src:./pages/20-待产用品常见品牌与价格.md
+src: ./pages/20-待产用品常见品牌与价格.md
 hide: false
 ---
