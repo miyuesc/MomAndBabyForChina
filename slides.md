@@ -46,6 +46,18 @@ src: ./pages/04-宝宝居家成长指南.md
 hide: false
 ---
 ---
+src: ./pages/05-宝宝儿保与疫苗.md
+hide: false
+---
+---
+src: ./pages/06-常见过敏原与过敏症状.md
+hide: false
+---
+---
+src: ./pages/07-新生儿常见病症及注意事项.md
+hide: false
+---
+---
 src: ./pages/10-宝宝注意事项.md
 hide: false
 ---
