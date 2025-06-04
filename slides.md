@@ -1,19 +1,19 @@
 ---
-theme: seriph
+theme: bricks
 background: https://cover.sli.dev
-title: 怀孕指南
+title: 孕期指南
 class: text-center
 drawings:
   persist: false
 transition: slide-left
 ---
 
-# 怀孕指南
+# 孕期指南
 
 MiyueFE
 
 <div @click="$slidev.nav.next" class="mt-12 py-1" hover:bg="white op-10">
-  Press Space for next page <carbon:arrow-right />
+  按下空格进入下一页 <carbon:arrow-right />
 </div>
 
 <div class="abs-br m-6 text-xl">
@@ -65,6 +65,11 @@ hide: false
 ---
 
 ---
-src: ./pages/12-资料.md
+src: ./pages/12-婴幼儿相关资料.md
+hide: false
+---
+
+---
+src: ./pages/20-待产用品常见品牌与价格.md
 hide: false
 ---
