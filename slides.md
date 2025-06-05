@@ -38,7 +38,7 @@ src: ./pages/02-宝宝待产&住院包.md
 hide: false
 ---
 ---
-src: ./pages/03-妈妈月子&哺乳期.md
+src: ./pages/03-妈妈产后恢复和哺乳指南.md
 hide: false
 ---
 ---
@@ -50,7 +50,7 @@ src: ./pages/05-宝宝儿保与疫苗.md
 hide: false
 ---
 ---
-src: ./pages/06-常见过敏原与过敏症状.md
+src: ./pages/06-新生儿常见过敏原与过敏症状.md
 hide: false
 ---
 ---
@@ -58,7 +58,7 @@ src: ./pages/07-新生儿常见病症及注意事项.md
 hide: false
 ---
 ---
-src: ./pages/10-宝宝注意事项.md
+src: ./pages/10-新生儿注意事项.md
 hide: false
 ---
 ---
