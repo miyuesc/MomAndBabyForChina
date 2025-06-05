@@ -74,6 +74,6 @@ src: ./pages/12-婴幼儿相关资料.md
 hide: false
 ---
 ---
-src: ./pages/20-待产用品常见品牌与价格.md
+src: ./pages/20-常见品牌与价格.md
 hide: false
 ---
