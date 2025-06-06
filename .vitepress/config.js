@@ -29,6 +29,7 @@ export default defineConfig({
       { text: '产后指南', link: '/03-妈妈产后恢复和哺乳指南' },
       { text: '新生儿护理', link: '/06-新生儿常见过敏原与过敏症状' },
       { text: '母婴用品', link: '/11-1-安全座椅' },
+      { text: '参考资料', link: '/90-参考资料' },
     ],
     sidebar: [
       {
@@ -63,6 +64,10 @@ export default defineConfig({
           { text: '母婴用品相关资料', link: '/12-母婴用品相关资料' },
           { text: '常见品牌与价格', link: '/20-常见品牌与价格' }
         ]
+      },
+      {
+        text: '参考资料',
+        link: '/90-参考资料'
       }
     ],
     aside: true,
