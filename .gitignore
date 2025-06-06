@@ -6,4 +6,6 @@ dist
 .remote-assets
 components.d.ts
 
+.vitepress/cache
+
 .idea
