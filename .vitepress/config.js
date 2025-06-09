@@ -28,7 +28,7 @@ export default defineConfig({
       { text: '待产准备', link: '/00-待产证件资料' },
       { text: '产后指南', link: '/03-妈妈产后恢复和哺乳指南' },
       { text: '新生儿护理', link: '/06-新生儿常见过敏原与过敏症状' },
-      { text: '母婴用品', link: '/11-1-安全座椅' },
+      { text: '母婴用品', link: '/11-0-奶粉' },
       { text: '参考资料', link: '/90-参考资料' },
     ],
     sidebar: [
@@ -59,6 +59,7 @@ export default defineConfig({
       {
         text: '母婴用品',
         items: [
+          { text: '婴幼儿奶粉', link: '/11-0-奶粉' },
           { text: '安全座椅', link: '/11-1-安全座椅' },
           { text: '婴儿推车', link: '/11-2-婴儿推车' },
           { text: '母婴用品相关资料', link: '/12-母婴用品相关资料' },
