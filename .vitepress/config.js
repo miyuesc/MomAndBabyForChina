@@ -8,7 +8,7 @@ export default defineConfig({
   base: '/',
   head: [
     ['meta', { name: 'keywords', content: '孕期指南,妈妈宝宝,待产准备,产后恢复,新生儿护理,母婴用品,哺乳指南,婴儿护理,孕妇健康,宝宝成长,儿保疫苗,安全座椅,婴儿推车,新生儿注意事项,过敏症状,病症护理' }],
-    ['meta', { name: 'author', content: '孕期指南团队' }],
+    ['meta', { name: 'author', content: 'MiyueFE' }],
     ['meta', { name: 'viewport', content: 'width=device-width, initial-scale=1.0' }],
     ['meta', { property: 'og:title', content: '孕期指南 - 妈妈和宝宝的全面指南' }],
     ['meta', { property: 'og:description', content: '专业的孕期指南，涵盖待产准备、产后恢复、新生儿护理、母婴用品选择等全方位内容，为准妈妈和新手妈妈提供贴心指导。' }],
