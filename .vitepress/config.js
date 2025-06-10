@@ -1,5 +1,7 @@
 import { defineConfig } from 'vitepress'
 
+import lightbox from "vitepress-plugin-lightbox";
+
 export default defineConfig({
   title: '孕期指南',
   description: '妈妈和宝宝的全面指南',
@@ -79,5 +81,11 @@ export default defineConfig({
     socialLinks: [
       { icon: 'github', link: 'https://github.com/miyuesc/MomAndBabyForChina' }
     ]
-  }
+  },
+  markdown: {
+    config: (md) => {
+      // Use lightbox plugin
+      md.use(lightbox, {});
+    },
+  },
 })
