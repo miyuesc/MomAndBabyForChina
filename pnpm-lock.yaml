@@ -15,6 +15,9 @@ importers:
       vitepress:
         specifier: ^1.0.0
         version: 1.6.3(@algolia/client-search@5.27.0)(@types/node@22.15.29)(drauu@0.4.3)(fuse.js@7.1.0)(postcss@8.5.4)(search-insights@2.17.3)(typescript@5.8.3)
+      vitepress-plugin-lightbox:
+        specifier: ^1.0.2
+        version: 1.0.2
 
 packages:
 
@@ -617,6 +620,9 @@ packages:
   mdast-util-to-hast@13.2.0:
     resolution: {integrity: sha512-QGYKEuUsYT9ykKBCMOEDLsU5JRObWQusAolFMeko/tYPufNkRffBAQjIE+99jbA87xv6FgmjLtwjh9wBWajwAA==}
 
+  medium-zoom@1.1.0:
+    resolution: {integrity: sha512-ewyDsp7k4InCUp3jRmwHBRFGyjBimKps/AJLjRSox+2q/2H4p/PNpQf+pwONWlJiOudkBXtbdmVbFjqyybfTmQ==}
+
   micromark-util-character@2.1.1:
     resolution: {integrity: sha512-wv8tdUTJ3thSFFFJKtpYKOYiGP2+v96Hvk4Tu8KpCAsTMs6yi+nVmGh1syvSCsaxz45J6Jbw+9DD6g97+NV67Q==}
 
@@ -648,6 +654,10 @@ packages:
 
   perfect-debounce@1.0.0:
     resolution: {integrity: sha512-xCy9V055GLEqoFaHoC1SoLIaLmWctgCUaBaWxDZ7/Zx4CTyX7cJQLJOok/orfjZAh9kEYpjJa4d0KcJmCbctZA==}
+
+  photoswipe@5.4.4:
+    resolution: {integrity: sha512-WNFHoKrkZNnvFFhbHL93WDkW3ifwVOXSW3w1UuZZelSmgXpIGiZSNlZJq37rR8YejqME2rHs9EhH9ZvlvFH2NA==}
+    engines: {node: '>= 0.12.0'}
 
   picocolors@1.1.1:
     resolution: {integrity: sha512-xceH2snhtb5M9liqDsmEw56le376mTZkEX/jEb/RxNFyegNul7eNslCXP9FDj/Lcu0X8KEyMceP2ntpaHrDEVA==}
@@ -768,6 +778,9 @@ packages:
         optional: true
       terser:
         optional: true
+
+  vitepress-plugin-lightbox@1.0.2:
+    resolution: {integrity: sha512-CLgz6iWzhTH/Buk0y/SPRy0Ukh+X9QPD1HMAlpVcBPPpENlKwtxKUrAzqwxgh/vOz+6Q+Kw5nKfPH1yL78Rlag==}
 
   vitepress@1.6.3:
     resolution: {integrity: sha512-fCkfdOk8yRZT8GD9BFqusW3+GggWYZ/rYncOfmgcDtP3ualNHCAg+Robxp2/6xfH1WwPHtGpPwv7mbA3qomtBw==}
@@ -1379,6 +1392,8 @@ snapshots:
       unist-util-visit: 5.0.0
       vfile: 6.0.3
 
+  medium-zoom@1.1.0: {}
+
   micromark-util-character@2.1.1:
     dependencies:
       micromark-util-symbol: 2.0.1
@@ -1409,6 +1424,8 @@ snapshots:
       regex-recursion: 6.0.2
 
   perfect-debounce@1.0.0: {}
+
+  photoswipe@5.4.4: {}
 
   picocolors@1.1.1: {}
 
@@ -1539,6 +1556,11 @@ snapshots:
     optionalDependencies:
       '@types/node': 22.15.29
       fsevents: 2.3.3
+
+  vitepress-plugin-lightbox@1.0.2:
+    dependencies:
+      medium-zoom: 1.1.0
+      photoswipe: 5.4.4
 
   vitepress@1.6.3(@algolia/client-search@5.27.0)(@types/node@22.15.29)(drauu@0.4.3)(fuse.js@7.1.0)(postcss@8.5.4)(search-insights@2.17.3)(typescript@5.8.3):
     dependencies:

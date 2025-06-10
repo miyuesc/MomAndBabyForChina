@@ -11,6 +11,7 @@
     "vue": "^3.5.16"
   },
   "devDependencies": {
-    "vitepress": "^1.0.0"
+    "vitepress": "^1.0.0",
+    "vitepress-plugin-lightbox": "^1.0.2"
   }
 }
