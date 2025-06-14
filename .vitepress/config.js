@@ -1,6 +1,7 @@
 import { defineConfig } from 'vitepress'
 
 import lightbox from "vitepress-plugin-lightbox";
+import tablePlugin from './plugins/table-plugin.js';
 
 export default defineConfig({
   title: '孕期指南',
@@ -86,6 +87,8 @@ export default defineConfig({
     config: (md) => {
       // Use lightbox plugin
       md.use(lightbox, {});
+      // Use custom table plugin
+      md.use(tablePlugin);
     },
   },
 })

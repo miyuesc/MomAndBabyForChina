@@ -6,3 +6,35 @@
 .VPDoc.has-aside .content-container {
   max-width: 100% !important;
 }
+
+table {
+  table-layout: fixed;
+}
+
+/* 列首永远固定在头部  */
+table.table__fixed-header thead tr th {
+  position: sticky;
+  top: 0;
+}
+
+td:first-child,
+th:first-child {
+  position: sticky;
+  left: -1px;
+  /* 首行永远固定在左侧 */
+  z-index: 1;
+}
+
+td:first-child {
+  background-color: inherit;
+}
+
+thead tr th {
+  position: sticky;
+  top: 0;
+  /* 列首永远固定在头部  */
+}
+
+th:first-child {
+  z-index: 2;
+}
