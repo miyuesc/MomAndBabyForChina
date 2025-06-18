@@ -95,7 +95,7 @@ function tablePlugin(md) {
         styles.push(`width: ${opts.width}`);
       }
       if (opts.height) {
-        styles.push(`height: ${opts.height}`);
+        styles.push(`max-height: ${opts.height}`);
       }
       if (styles.length > 0) {
         result += ` style="${styles.join('; ')}"`;
@@ -113,7 +113,22 @@ function tablePlugin(md) {
 
     // 检查是否需要添加固定列样式
     if (token.cellFixed) {
-      result += ` class="td__fixed"`;
+      let classes = ['fixed__td'];
+      if (token.cellFixedType === 'left') {
+        classes.push('fixed__left');
+        classes.push(`fixed__left-${token.cellFixedIndex}`);
+      } else if (token.cellFixedType === 'right') {
+        classes.push('fixed__right');
+        classes.push(`fixed__right-${token.cellFixedIndex}`);
+      }
+      result += ` class="${classes.join(' ')}"`;
+
+      // 添加data属性用于CSS计算
+      if (token.cellFixedType === 'left') {
+        result += ` data-fixed-left="${token.cellFixedIndex}"`;
+      } else if (token.cellFixedType === 'right') {
+        result += ` data-fixed-right="${token.cellFixedIndex}"`;
+      }
     }
 
     result += '>';
@@ -165,76 +180,33 @@ function tablePlugin(md) {
     // 跳过当前行
     state.line = start + 1;
 
+    // 记录解析前的token数量
+    const tokensBeforeTable = state.tokens.length;
+
     // 解析表格
     const tableStart = state.line;
     const tableRule = md.block.ruler.__rules__.find(rule => rule.name === 'table');
-    if (tableRule && tableRule.fn(state, tableStart, end, false)) {
-      // 找到表格的所有 token
-      const tableTokens = [];
-      let tableFound = false;
 
-      for (let i = state.tokens.length - 1; i >= 0; i--) {
-        const token = state.tokens[i];
-        if (token.type === 'table_open') {
-          tableFound = true;
-          token.tableOptions = tableOptions;
+    if (tableRule && tableRule.fn(state, tableStart, end, false)) {
+      // 找到新添加的表格tokens
+      const newTokens = state.tokens.slice(tokensBeforeTable);
+      let tableOpenIndex = -1;
+
+      // 找到table_open token的索引
+      for (let i = 0; i < newTokens.length; i++) {
+        if (newTokens[i].type === 'table_open') {
+          tableOpenIndex = tokensBeforeTable + i;
           break;
         }
       }
 
-      // 为表格中的单元格添加固定列标记
-      if (tableFound && (tableOptions.fixedLeft > 0 || tableOptions.fixedRight > 0)) {
-        let rowIndex = 0;
-        let cellIndex = 0;
-        let isInRow = false;
-        let totalCells = 0;
+      if (tableOpenIndex !== -1) {
+        // 为table_open token添加配置
+        state.tokens[tableOpenIndex].tableOptions = tableOptions;
 
-        // 首先计算每行的单元格总数
-        for (let i = state.tokens.length - 1; i >= 0; i--) {
-          const token = state.tokens[i];
-          if (token.type === 'table_open') {
-            break;
-          }
-          if (token.type === 'tr_open') {
-            let cellCount = 0;
-            for (let j = i + 1; j < state.tokens.length; j++) {
-              if (state.tokens[j].type === 'tr_close') {
-                break;
-              }
-              if (state.tokens[j].type === 'td_open' || state.tokens[j].type === 'th_open') {
-                cellCount++;
-              }
-            }
-            if (cellCount > totalCells) {
-              totalCells = cellCount;
-            }
-          }
-        }
-
-        // 为单元格添加固定标记
-        rowIndex = 0;
-        for (let i = state.tokens.length - 1; i >= 0; i--) {
-          const token = state.tokens[i];
-          if (token.type === 'table_open') {
-            break;
-          }
-          if (token.type === 'tr_open') {
-            isInRow = true;
-            cellIndex = 0;
-            rowIndex++;
-          } else if (token.type === 'tr_close') {
-            isInRow = false;
-          } else if (isInRow && (token.type === 'td_open' || token.type === 'th_open')) {
-            // 检查是否需要固定左侧列
-            if (tableOptions.fixedLeft > 0 && cellIndex < tableOptions.fixedLeft) {
-              token.cellFixed = true;
-            }
-            // 检查是否需要固定右侧列
-            if (tableOptions.fixedRight > 0 && cellIndex >= (totalCells - tableOptions.fixedRight)) {
-              token.cellFixed = true;
-            }
-            cellIndex++;
-          }
+        // 如果需要固定列，处理单元格
+        if (tableOptions.fixedLeft > 0 || tableOptions.fixedRight > 0) {
+          processFixedColumns(state.tokens, tableOpenIndex, tableOptions);
         }
       }
 
@@ -243,6 +215,98 @@ function tablePlugin(md) {
 
     return false;
   });
+
+  // 处理固定列的函数
+  function processFixedColumns(tokens, tableStartIndex, tableOptions) {
+    let totalCells = 0;
+    let currentRowCells = 0;
+    let isInTable = false;
+    let isInRow = false;
+
+    // 首先计算表格的最大列数
+    for (let i = tableStartIndex; i < tokens.length; i++) {
+      const token = tokens[i];
+
+      if (token.type === 'table_open') {
+        isInTable = true;
+        continue;
+      }
+
+      if (token.type === 'table_close') {
+        isInTable = false;
+        break;
+      }
+
+      if (!isInTable) continue;
+
+      if (token.type === 'tr_open') {
+        isInRow = true;
+        currentRowCells = 0;
+        continue;
+      }
+
+      if (token.type === 'tr_close') {
+        isInRow = false;
+        if (currentRowCells > totalCells) {
+          totalCells = currentRowCells;
+        }
+        continue;
+      }
+
+      if (isInRow && (token.type === 'td_open' || token.type === 'th_open')) {
+        currentRowCells++;
+      }
+    }
+
+    // 重新遍历，为需要固定的单元格添加标记
+    isInTable = false;
+    isInRow = false;
+    let cellIndex = 0;
+
+    for (let i = tableStartIndex; i < tokens.length; i++) {
+      const token = tokens[i];
+
+      if (token.type === 'table_open') {
+        isInTable = true;
+        continue;
+      }
+
+      if (token.type === 'table_close') {
+        isInTable = false;
+        break;
+      }
+
+      if (!isInTable) continue;
+
+      if (token.type === 'tr_open') {
+        isInRow = true;
+        cellIndex = 0;
+        continue;
+      }
+
+      if (token.type === 'tr_close') {
+        isInRow = false;
+        continue;
+      }
+
+      if (isInRow && (token.type === 'td_open' || token.type === 'th_open')) {
+        // 检查是否需要固定左侧列
+        if (tableOptions.fixedLeft > 0 && cellIndex < tableOptions.fixedLeft) {
+          token.cellFixed = true;
+          token.cellFixedType = 'left';
+          token.cellFixedIndex = cellIndex;
+        }
+        // 检查是否需要固定右侧列
+        else if (tableOptions.fixedRight > 0 && cellIndex >= (totalCells - tableOptions.fixedRight)) {
+          token.cellFixed = true;
+          token.cellFixedType = 'right';
+          token.cellFixedIndex = totalCells - cellIndex - 1;
+        }
+
+        cellIndex++;
+      }
+    }
+  }
 }
 
 export default tablePlugin;

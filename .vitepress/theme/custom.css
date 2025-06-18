@@ -2,12 +2,21 @@
   --vp-layout-max-width: 90vw;
 }
 
+.vp-doc table {
+  border-collapse: separate;
+}
+
 /* 内容区铺满 */
 .VPDoc.has-aside .content-container {
   max-width: 100% !important;
+  position: relative;
 }
 
 table {
+  table-layout: fixed;
+}
+
+table.table__fixed-header {
   table-layout: fixed;
 }
 
@@ -17,24 +26,46 @@ table.table__fixed-header thead tr th {
   top: 0;
 }
 
-td:first-child,
-th:first-child {
+/* 固定列样式 */
+.fixed__td {
   position: sticky;
-  left: -1px;
-  /* 首行永远固定在左侧 */
   z-index: 1;
-}
-
-td:first-child {
   background-color: inherit;
 }
 
-thead tr th {
-  position: sticky;
-  top: 0;
-  /* 列首永远固定在头部  */
+/* 固定左侧列 */
+.fixed__left {
+  left: 0;
 }
 
-th:first-child {
+/* 固定右侧列 */
+.fixed__right {
+  right: 0;
+}
+
+/* 表头固定列需要更高的z-index */
+table.table__fixed-header thead tr th.fixed__td {
   z-index: 2;
+}
+
+/* 多个固定左列的位置计算 */
+table td.fixed__td.fixed__left,
+table th.fixed__td.fixed__left {
+  left: 0;
+}
+
+/* 多个固定右列的位置计算 */
+table td.fixed__td.fixed__right,
+table th.fixed__td.fixed__right {
+  right: 0;
+}
+
+
+/* 固定列边框效果 */
+.fixed__td.fixed__left {
+  border-right: 1px solid var(--vp-c-border);
+}
+
+.fixed__td.fixed__right {
+  border-left: 1px solid var(--vp-c-border);
 }
